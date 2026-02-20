@@ -1,23 +1,77 @@
 <script>
 function checkCode(){
-  let code=document.getElementById("code").value.trim();
-  let linkDiv=document.getElementById("fileLink");
+  const codeEl = document.getElementById("code");
+  const linkDiv = document.getElementById("fileLink");
 
+  let code = (codeEl.value || "").trim();
+
+  // Map: code -> base64(filename)
   const fileMap = {
     "WL-2389": btoa("wisdom-light-7X92L.pdf"),
     "SM-9921": btoa("simplicity-A83K2.pdf"),
     "CP-7833": btoa("cpp-Z51M4.pdf")
+    // "DY-5512": btoa("deylaman-F29P8.pdf")  // later when rebuilt
   };
 
-  if(fileMap[code]){
-    let decodedFile = atob(fileMap[code]);
-    let finalPath = "/assets/.dl/" + decodedFile;
+  // reset UI
+  linkDiv.style.display = "none";
+  linkDiv.innerHTML = "";
 
-    linkDiv.innerHTML = '<a href="'+finalPath+'" target="_blank">Download File</a>';
-    linkDiv.style.display = "block";
-  }
-  else{
+  if(!fileMap[code]){
     alert("Invalid Code");
+    return;
   }
+
+  // Build path only after success
+  const decodedFile = atob(fileMap[code]);
+  const finalPath = "/assets/.dl/" + decodedFile;
+
+  // Create a time-limited link (UI-level)
+  const expiresInSeconds = 45; // ✅ you can set 30/60/90
+  const expireAt = Date.now() + expiresInSeconds * 1000;
+
+  // Build UI
+  const a = document.createElement("a");
+  a.href = finalPath;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.textContent = "Download File (valid for " + expiresInSeconds + "s)";
+  a.style.display = "inline-block";
+
+  const timer = document.createElement("div");
+  timer.style.marginTop = "10px";
+  timer.style.fontSize = "12px";
+  timer.style.opacity = "0.85";
+
+  const hint = document.createElement("div");
+  hint.style.marginTop = "12px";
+  hint.style.fontSize = "12px";
+  hint.style.opacity = "0.8";
+  hint.textContent = "Note: Link will disappear automatically. Please download immediately.";
+
+  linkDiv.appendChild(a);
+  linkDiv.appendChild(timer);
+  linkDiv.appendChild(hint);
+  linkDiv.style.display = "block";
+
+  // Disable input after success (one-time UX)
+  codeEl.disabled = true;
+
+  // Countdown + auto-expire
+  const tick = setInterval(() => {
+    const left = Math.max(0, Math.ceil((expireAt - Date.now()) / 1000));
+    timer.textContent = "Time remaining: " + left + "s";
+    if(left <= 0){
+      clearInterval(tick);
+      linkDiv.innerHTML = "";
+      linkDiv.style.display = "none";
+      codeEl.disabled = false;
+      codeEl.value = "";
+      alert("Link expired. Please enter the code again.");
+    }
+  }, 500);
 }
+
+// basic anti-copy (UI friction only, not real security)
+document.addEventListener("contextmenu", (e) => e.preventDefault());
 </script>
