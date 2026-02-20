@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smaily Book Store — Official Digital Publishing Archive</title>
+  <title>Smaily Book Store — Official International Digital Editions</title>
 
   <style>
     :root{
@@ -29,26 +29,30 @@
 
       --btnDisabled:#2a2a2a;
       --btnDisabledText:#8a8a8a;
+
+      --btnAltBg: transparent;
+      --btnAltText:#ffffff;
+      --btnAltBorder: rgba(255,255,255,.26);
+      --btnAltHover: rgba(255,255,255,.08);
     }
 
     /* Hard safety: never allow horizontal overflow */
     html, body { width:100%; overflow-x:hidden; }
-
-    *{ box-sizing:border-box; }
+    * { box-sizing:border-box; }
 
     body{
       margin:0;
       font-family: Georgia, serif;
       color:var(--text);
       background: linear-gradient(180deg, var(--bg1), var(--bg2));
-      text-align:center;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ===== Brand Header (single, fixed layout) ===== */
+    /* Brand Header (single, fixed layout) */
     header.brand{
       padding: 46px 16px 18px;
+      text-align:center;
     }
     .brand-wrap{
       display:flex;
@@ -56,70 +60,62 @@
       align-items:center;
       gap:10px;
       margin:0 auto;
-      max-width: 980px;
+      max-width:980px;
     }
-
     .brand-logo{
       width:128px;
       height:auto;
       display:block;
-      /* Nice depth without breaking layout */
       filter: drop-shadow(0 10px 22px rgba(0,0,0,.35));
     }
-
     .brand-name{
       margin:0;
-      font-size: 34px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-size:34px;
+      font-weight:800;
+      letter-spacing:1px;
       line-height:1.08;
     }
-
     .brand-tagline{
       margin:0;
-      font-size: 16px;
-      color: var(--muted);
-      font-style: italic;
+      font-size:16px;
+      color:var(--muted);
+      font-style:italic;
       line-height:1.25;
     }
-
     .brand-sub{
-      margin-top: 14px;
-      font-size: 16px;
-      color: var(--muted2);
-      letter-spacing: .2px;
-      line-height:1.3;
-      overflow-wrap:anywhere;
+      margin-top:14px;
+      font-size:16px;
+      color:var(--muted2);
+      letter-spacing:.2px;
+      line-height:1.35;
     }
 
-    /* ===== Layout ===== */
+    /* Layout */
     main.container{
-      max-width: 980px;
-      margin: 0 auto;
+      max-width:980px;
+      margin:0 auto;
       padding: 18px 16px 70px;
-      text-align: left; /* critical: prevents weird center overflow */
+      text-align:left;
     }
 
     .grid{
       display:grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+    @media (min-width:860px){
+      .grid{ grid-template-columns:1fr 1fr; }
     }
 
-    @media (min-width: 860px){
-      .grid{ grid-template-columns: 1fr 1fr; }
-    }
-
-    /* ===== Card ===== */
+    /* Card */
     section.card{
       background: linear-gradient(180deg, var(--card1), var(--card2));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 18px;
-      overflow:hidden; /* critical: blocks anything from spilling */
+      overflow:hidden;
     }
-
     section.card:hover{
       transform: translateY(-2px);
       transition: .18s ease;
@@ -128,15 +124,14 @@
     /* Top row */
     .book-top{
       display:flex;
-      gap: 14px;
+      gap:14px;
       align-items:flex-start;
-      /* critical: allow flex children to shrink */
-      min-width:0;
+      min-width:0; /* allow shrink */
     }
 
     /* Cover */
-    .cover{
-      width: 140px;
+    img.cover{
+      width:140px;
       height:auto;
       border-radius: var(--radiusSm);
       border: 1px solid var(--border);
@@ -148,34 +143,32 @@
     /* Meta */
     .book-meta{
       flex: 1 1 auto;
-      min-width:0;            /* critical: prevents pushing out */
+      min-width:0;
       width:100%;
     }
-
     .title{
       margin:0;
-      font-size: 26px;
+      font-size:26px;
       line-height:1.12;
       letter-spacing:.2px;
       overflow-wrap:anywhere;
-      word-break: break-word;
+      word-break:break-word;
     }
-
     .edition{
-      margin: 10px 0 0;
-      font-size: 15px;
-      color: var(--muted);
-      line-height:1.5;
+      margin:10px 0 0;
+      font-size:15px;
+      color:var(--muted);
+      line-height:1.55;
       overflow-wrap:anywhere;
-      word-break: break-word;
+      word-break:break-word;
     }
 
     /* Actions */
     .actions{
-      margin-top: 14px;
+      margin-top:14px;
       display:flex;
       flex-wrap:wrap;
-      gap: 10px;
+      gap:10px;
       align-items:center;
     }
 
@@ -185,13 +178,12 @@
       border-radius: var(--radiusSm);
       border: 1px solid rgba(255,255,255,.18);
       text-decoration:none;
-      font-weight: 800;
+      font-weight:800;
       letter-spacing:.2px;
-      font-size: 14px;
+      font-size:14px;
       line-height:1.1;
-
-      max-width: 100%;
-      white-space: normal;     /* critical: wrap */
+      max-width:100%;
+      white-space:normal;
       overflow-wrap:anywhere;
     }
 
@@ -199,16 +191,19 @@
       background: var(--btn);
       color: var(--btnText);
     }
-    a.btn:hover{ background: var(--btnHover); transition:.18s ease; }
+    a.btn:hover{
+      background: var(--btnHover);
+      transition: .18s ease;
+    }
 
     a.btn.secondary{
-      background: transparent;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,.26);
+      background: var(--btnAltBg);
+      color: var(--btnAltText);
+      border: 1px solid var(--btnAltBorder);
     }
     a.btn.secondary:hover{
-      background: rgba(255,255,255,.08);
-      transition:.18s ease;
+      background: var(--btnAltHover);
+      transition: .18s ease;
     }
 
     span.btn.disabled{
@@ -219,35 +214,30 @@
     }
 
     .tiny{
-      margin-top: 10px;
-      font-size: 12px;
-      color: #8f8f8f;
+      margin-top:10px;
+      font-size:12px;
+      color:#8f8f8f;
       line-height:1.6;
       overflow-wrap:anywhere;
-      word-break: break-word;
+      word-break:break-word;
     }
 
-    /* ===== Mobile: stack cover above text ===== */
-    @media (max-width: 859px){
-      body{ text-align:center; }          /* keep header centered */
-      main.container{ text-align:left; }  /* keep cards left to avoid overflow */
-
+    /* Mobile tuning */
+    @media (max-width:859px){
+      main.container{ text-align:left; }
       .book-top{
         flex-direction:column;
         align-items:flex-start;
       }
-      .cover{
-        width: 100%;
-        max-width: 360px;
-      }
-      .title{ font-size: 28px; }
+      img.cover{ width:100%; max-width: 420px; }
+      .title{ font-size:28px; }
     }
 
     footer{
       margin-top: 22px;
       padding: 26px 16px 42px;
-      color: #9b9b9b;
-      font-size: 13px;
+      color:#9b9b9b;
+      font-size:13px;
       line-height:1.7;
       text-align:center;
     }
@@ -264,7 +254,7 @@
       <img class="brand-logo" src="logo-green-transparent.png" alt="Smaily Book Store Logo" />
       <h1 class="brand-name">Smaily Book Store</h1>
       <p class="brand-tagline">Where Knowledge Meets Soul</p>
-      <div class="brand-sub">Official Digital Publishing Archive</div>
+      <div class="brand-sub">Official International Digital Editions</div>
     </div>
   </header>
 
@@ -281,10 +271,14 @@
 
             <div class="actions">
               <a class="btn secondary" href="wisdom-of-deylaman.html">Open Book Page</a>
-              <a class="btn" href="books/wisdom-of-deylaman_sample.pdf">Download Free Sample</a>
+              <a class="btn" href="books/wisdom-of-deylaman_sample.pdf" download>Download Free Sample</a>
+              <!-- Payment page (create later): /payment/wisdom-of-deylaman.html -->
+              <span class="btn disabled">Buy Full Edition — Coming Soon</span>
             </div>
 
-            <div class="tiny">Sample file path: <span>/books/wisdom-of-deylaman_sample.pdf</span></div>
+            <div class="tiny">
+              Full edition download is not hosted publicly. Purchase delivery will be provided after confirmation.
+            </div>
           </div>
         </div>
       </section>
@@ -299,13 +293,13 @@
 
             <div class="actions">
               <a class="btn secondary" href="echoes-of-gilan.html">Open Book Page</a>
-              <span class="btn disabled">Sample Not Available Yet</span>
-              <!-- When ready, replace the line above with:
-              <a class="btn" href="books/echoes-of-gilan_sample.pdf">Download Free Sample</a>
-              -->
+              <span class="btn disabled">Sample — Not Available Yet</span>
+              <span class="btn disabled">Buy Full Edition — Coming Soon</span>
             </div>
 
-            <div class="tiny">(Activate sample button after uploading: <span>/books/echoes-of-gilan_sample.pdf</span>)</div>
+            <div class="tiny">
+              Sample and official release will be activated after upload and final verification.
+            </div>
           </div>
         </div>
       </section>
@@ -320,42 +314,45 @@
 
             <div class="actions">
               <a class="btn secondary" href="the-human-of-future-light.html">Open Book Page</a>
-              <span class="btn disabled">Sample Not Available Yet</span>
-              <!-- When ready:
-              <a class="btn" href="books/the-human-of-future-light_sample.pdf">Download Free Sample</a>
-              -->
+              <span class="btn disabled">Sample — Not Available Yet</span>
+              <span class="btn disabled">Buy Full Edition — Coming Soon</span>
             </div>
 
-            <div class="tiny">(Activate sample button after uploading: <span>/books/the-human-of-future-light_sample.pdf</span>)</div>
+            <div class="tiny">
+              Sample and official release will be activated after upload and final verification.
+            </div>
           </div>
         </div>
       </section>
-<!-- ===== BOOK 4 ===== -->
-<section class="card">
-  <div class="book-top">
-    <img class="cover" src="img/covers/the-power-of-simplicity.png" alt="The Power of Simplicity Cover" />
-    <div class="book-meta">
-      <h2 class="title">The Power of Simplicity</h2>
-      <p class="edition">Philosophical Archive Edition — Official Digital Publication</p>
 
-      <div class="actions">
-        <a class="btn secondary" href="books/the-power-of-simplicity/">Open Book Page</a>
-        <a class="btn" href="archive/THE_POWER_OF_SIMPLICITY_KDP_PRINT_READY.pdf" target="_blank">Download Full Edition</a>
-      </div>
+      <!-- ===== BOOK 4 ===== -->
+      <section class="card">
+        <div class="book-top">
+          <img class="cover" src="img/covers/the-power-of-simplicity.png" alt="The Power of Simplicity Cover" />
+          <div class="book-meta">
+            <h2 class="title">The Power of Simplicity</h2>
+            <p class="edition">Philosophical Archive Edition — Official Digital Publication.</p>
 
-      <div class="tiny">
-        Full file path: <span>archive/THE_POWER_OF_SIMPLICITY_KDP_PRINT_READY.pdf</span>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="actions">
+              <a class="btn secondary" href="books/the_power_of_simplicity/">Open Book Page</a>
+              <!-- IMPORTANT: remove direct archive PDF links from public pages -->
+              <span class="btn disabled">Buy Full Edition — Coming Soon</span>
+            </div>
+
+            <div class="tiny">
+              Full edition is not distributed via public repository links.
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </main>
 
   <footer>
-    Smaily Book Store — Official Digital Archive<br />
+    Smaily Book Store — Official International Digital Editions<br />
     <span class="tiny">© All Rights Reserved</span><br />
-    <span class="tiny">https://smailybookstore.github.io</span>
+    <span class="tiny">smailybookstore.github.io</span>
   </footer>
 
 </body>
