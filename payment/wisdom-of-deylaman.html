@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy — The Wisdom of Deylaman (Crypto Payment)</title>
+
+  <style>
+    :root{
+      --bg1:#0f0f0f; --bg2:#151515;
+      --card1:#161616; --card2:#101010;
+      --text:#fff; --muted:#bdbdbd; --muted2:#9a9a9a;
+      --border: rgba(255,255,255,.12);
+      --shadow: 0 14px 30px rgba(0,0,0,.55);
+      --radius:18px; --radiusSm:12px;
+      --btn:#ffffff; --btnText:#0a0a0a; --btnHover:#e8e8e8;
+      --btnAltBg: transparent; --btnAltText:#ffffff;
+      --btnAltBorder: rgba(255,255,255,.26); --btnAltHover: rgba(255,255,255,.08);
+      --danger:#ff6b6b; --ok:#7CFFB2;
+    }
+    html, body{ width:100%; overflow-x:hidden; }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0; font-family: Georgia, serif; color:var(--text);
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    header{
+      padding: 34px 16px 10px; text-align:center;
+    }
+    .brand{
+      max-width:980px; margin:0 auto;
+      display:flex; flex-direction:column; align-items:center; gap:10px;
+    }
+    .logo{ width:110px; height:auto; filter: drop-shadow(0 10px 22px rgba(0,0,0,.35)); }
+    h1{ margin:0; font-size:30px; letter-spacing:.6px; }
+    .sub{ color:var(--muted2); font-size:14px; line-height:1.5; max-width:720px; }
+
+    main{
+      max-width:980px; margin:0 auto; padding: 16px 16px 60px;
+    }
+    .card{
+      background: linear-gradient(180deg,var(--card1),var(--card2));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .top{
+      display:flex; gap:16px; align-items:flex-start; min-width:0;
+      flex-wrap:wrap;
+    }
+    .cover{
+      width:180px; max-width:100%;
+      border-radius: var(--radiusSm);
+      border: 1px solid var(--border);
+      background:#0b0b0b;
+    }
+    .meta{ flex:1 1 320px; min-width:0; }
+    .title{ margin:0; font-size:28px; line-height:1.12; }
+    .desc{ margin:10px 0 0; color:var(--muted); line-height:1.6; }
+
+    .grid{
+      display:grid; grid-template-columns: 1fr;
+      gap:14px; margin-top:16px;
+    }
+    @media(min-width:900px){
+      .grid{ grid-template-columns: 1.1fr .9fr; }
+    }
+    .box{
+      border:1px solid var(--border);
+      border-radius: var(--radiusSm);
+      padding:14px;
+      background: rgba(255,255,255,.02);
+    }
+    .label{ font-size:12px; color:var(--muted2); letter-spacing:.2px; }
+    .value{
+      margin-top:6px;
+      font-weight:800;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      line-height:1.4;
+    }
+    .price{
+      font-size:20px;
+    }
+    .hint{
+      margin-top:10px; font-size:12px; color:#8f8f8f; line-height:1.6;
+    }
+    .warn{ color: var(--danger); font-weight:700; }
+    .ok{ color: var(--ok); font-weight:700; }
+
+    .actions{
+      margin-top:14px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+    }
+    a.btn, button.btn{
+      display:inline-block;
+      padding: 10px 14px;
+      border-radius: var(--radiusSm);
+      border: 1px solid rgba(255,255,255,.18);
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.2px;
+      font-size:14px;
+      background: var(--btn);
+      color: var(--btnText);
+      cursor:pointer;
+    }
+    a.btn:hover, button.btn:hover{ background: var(--btnHover); transition:.18s ease; }
+    a.btn.secondary{
+      background: var(--btnAltBg);
+      color: var(--btnAltText);
+      border: 1px solid var(--btnAltBorder);
+    }
+    a.btn.secondary:hover{ background: var(--btnAltHover); transition:.18s ease; }
+
+    input, textarea{
+      width:100%;
+      margin-top:6px;
+      padding:10px 12px;
+      border-radius: 10px;
+      border:1px solid rgba(255,255,255,.16);
+      background:#0c0c0c;
+      color:var(--text);
+      font-family: inherit;
+      font-size:14px;
+      outline:none;
+    }
+    textarea{ min-height: 92px; resize: vertical; }
+    .row{ margin-top:12px; }
+    .small{ font-size:12px; color:#8f8f8f; line-height:1.6; margin-top:10px; }
+
+    .divider{
+      height:1px; background: rgba(255,255,255,.10);
+      margin: 16px 0;
+    }
+
+    footer{
+      text-align:center; padding: 18px 16px 38px;
+      color:#9b9b9b; font-size:13px; line-height:1.7;
+    }
+    footer .tiny{ font-size:12px; color:#7f7f7f; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <img class="logo" src="../logo-green-transparent.png" alt="Smaily Book Store Logo" />
+      <h1>Crypto Purchase</h1>
+      <div class="sub">
+        Smaily Book Store — Official International Digital Editions
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="top">
+        <img class="cover" src="../wisdom-of-deylaman_cover.png" alt="The Wisdom of Deylaman Cover" />
+        <div class="meta">
+          <h2 class="title">The Wisdom of Deylaman</h2>
+          <p class="desc">
+            Official Digital Edition — Delivery is provided after payment confirmation.
+          </p>
+
+          <div class="actions">
+            <a class="btn secondary" href="../wisdom-of-deylaman.html">Back to Book Page</a>
+            <a class="btn secondary" href="../index.html">Back to Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="grid">
+
+        <!-- PAYMENT BOX -->
+        <div class="box">
+          <div class="label">Price (recommended: USDT)</div>
+          <div class="value price">19 USDT</div>
+          <div class="hint">
+            You can change the price later. For stability, prefer <span class="ok">USDT</span> over volatile coins.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="label">Network (choose ONE and keep it consistent)</div>
+          <div class="value">TRON (TRC20) — USDT</div>
+          <div class="hint">
+            TRC20 fees are usually low. If you prefer Ethereum (ERC20), update the network label and address below.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="label">Wallet Address (replace with YOUR address)</div>
+          <div class="value" id="wallet">TUEPEMoUZWP76CuQAtkrxr1a5Udv4Ub93i</div>
+
+          <div class="actions">
+            <button class="btn" type="button" onclick="copyWallet()">Copy Address</button>
+          </div>
+
+          <div class="hint">
+            <span class="warn">Important:</span> Send exactly <b>19 USDT</b> on <b>TRC20</b>.
+            Sending via a wrong network may result in loss.
+          </div>
+        </div>
+
+        <!-- CONFIRMATION BOX -->
+        <div class="box">
+          <div class="label">After Payment — Submit Confirmation</div>
+          <div class="hint">
+            Paste your transaction hash (TxID) and your email. We will confirm and send your download link.
+          </div>
+
+          <div class="row">
+            <div class="label">iran.jsbsmaily@gmail.com</div>
+            <input id="email" type="email" placeholder="name@example.com" />
+          </div>
+
+          <div class="row">
+            <div class="label">Transaction Hash (TxID)</div>
+            <input id="tx" type="text" placeholder="Paste TxID here…" />
+          </div>
+
+          <div class="row">
+            <div class="label">Notes (optional)</div>
+            <textarea id="note" placeholder="Optional message…"></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="button" onclick="openEmail()">Send Confirmation</button>
+          </div>
+
+          <div class="small">
+            This button opens your email app with a prepared message.
+            If your mail app doesn’t open, email us manually at:
+            <b>YOUR_EMAIL_HERE</b>
+            with subject:
+            <b>Purchase Confirmation — The Wisdom of Deylaman</b>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="hint">
+        <b>Delivery policy:</b> After confirmation, you will receive a private download link (time-limited).
+        No full files are hosted publicly in the repository.
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Smaily Book Store — Official International Digital Editions<br />
+    <span class="tiny">© All Rights Reserved</span>
+  </footer>
+
+  <script>
+    function copyWallet(){
+      const t = document.getElementById('wallet').innerText.trim();
+      if(!t || t.includes("YOUR_")){
+        alert("Please replace the wallet address in the HTML first.");
+        return;
+      }
+      navigator.clipboard.writeText(t).then(()=>{
+        alert("Wallet address copied.");
+      }).catch(()=>{
+        alert("Copy failed. Please select and copy manually.");
+      });
+    }
+
+    function openEmail(){
+      const email = document.getElementById('email').value.trim();
+      const tx = document.getElementById('tx').value.trim();
+      const note = document.getElementById('note').value.trim();
+
+      if(!email || !tx){
+        alert("Please enter your Email and Transaction Hash (TxID).");
+        return;
+      }
+
+      const to = "YOUR_EMAIL_HERE";
+      const subject = "Purchase Confirmation — The Wisdom of Deylaman";
+      const body =
+`Hello,
+
+I have sent payment for:
+The Wisdom of Deylaman — Full Digital Edition
+
+Network: TRC20 (USDT)
+Amount: 19 USDT
+
+Buyer Email: ${email}
+Transaction Hash (TxID): ${tx}
+
+Notes:
+${note || "-"}
+
+Thank you.`;
+
+      const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+    }
+  </script>
+</body>
+</html>
