@@ -1,94 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secure Delivery – Smaily Book Store</title>
-<style>
-body{
-margin:0;
-font-family:system-ui;
-background:#0c1220;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
-}
-.card{
-background:#141b2e;
-padding:40px;
-border-radius:16px;
-width:90%;
-max-width:420px;
-text-align:center;
-}
-input{
-width:100%;
-padding:12px;
-border-radius:8px;
-border:none;
-margin-top:10px;
-margin-bottom:20px;
-}
-button{
-background:#2b6cff;
-color:white;
-padding:12px 20px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-width:100%;
-}
-.link{
-margin-top:20px;
-display:none;
-}
-a{
-color:#00e0ff;
-}
-</style>
-</head>
-<body>
-
-<div class="card">
-<h2>Secure File Delivery</h2>
-<p>Enter your access code</p>
-
-<input type="text" id="code" placeholder="Enter your code here">
-
-<button onclick="checkCode()">Access File</button>
-
-<div class="link" id="fileLink"></div>
-</div>
-
 <script>
 function checkCode(){
-let code=document.getElementById("code").value;
-let linkDiv=document.getElementById("fileLink");
+  let code=document.getElementById("code").value.trim();
+  let linkDiv=document.getElementById("fileLink");
 
-if(code==="WL-2389"){
-linkDiv.innerHTML='<a href="/assets/files/wisdom-light-7X92L.pdf" target="_blank">Download The Wisdom of Light</a>';
-linkDiv.style.display="block";
+  const fileMap = {
+    "WL-2389": btoa("wisdom-light-7X92L.pdf"),
+    "SM-9921": btoa("simplicity-A83K2.pdf"),
+    "CP-7833": btoa("cpp-Z51M4.pdf")
+  };
 
-else if(code==="SM-9921"){
-linkDiv.innerHTML='<a href="/assets/files/simplicity-A83K2.pdf" target="_blank">Download Simplicity</a>';
-linkDiv.style.display="block";
-}
-/* else if(code==="DY-5512"){
-linkDiv.innerHTML='<a href="/assets/files/deylaman-F29P8.pdf" target="_blank">Download The Wisdom of Deylaman</a>';
-linkDiv.style.display="block";
-} */
+  if(fileMap[code]){
+    let decodedFile = atob(fileMap[code]);
+    let finalPath = "/assets/.dl/" + decodedFile;
 
-else if(code==="CP-7833"){
-linkDiv.innerHTML='<a href="/assets/files/cpp-Z51M4.pdf" target="_blank">Download Comprehensive Publishing Project</a>';
-linkDiv.style.display="block";
-}
-else{
-alert("Invalid Code");
-}
+    linkDiv.innerHTML = '<a href="'+finalPath+'" target="_blank">Download File</a>';
+    linkDiv.style.display = "block";
+  }
+  else{
+    alert("Invalid Code");
+  }
 }
 </script>
-
-</body>
-</html>
