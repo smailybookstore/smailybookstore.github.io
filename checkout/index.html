@@ -167,11 +167,17 @@ let body =
 "\nBuyer Email: " + email +
 "\nTransaction Hash: " + tx;
 
-window.location.href =
-"mailto:iran.jbsmaily@gmail.com?subject=" +
-encodeURIComponent(subject) +
-"&body=" +
-encodeURIComponent(body);
+let message =
+  "New Crypto Purchase%0A" +
+  "Book: " + book + "%0A" +
+  "Amount: " + amount + " USDT (TRC20)%0A" +
+  "Buyer Email: " + email + "%0A" +
+  "Transaction Hash: " + tx;
+
+window.open(
+  "https://t.me/YOUR_TELEGRAM_USERNAME?text=" + message,
+  "_blank"
+);
 }
 </script>
 
