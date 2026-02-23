@@ -241,8 +241,17 @@
       line-height:1.7;
       text-align:center;
     }
-    footer .tiny{ margin:0; font-size:12px; color:#7f7f7f; }
-  </style>
+    footer .tiny{ margin:0; }
+
+/* remove accidental decorative pills */
+.card::before, .card::after,
+.book-top::before, .book-top::after,
+.actions::before, .actions::after{
+  content: none !important;
+  display: none !important;
+}
+    
+</style>
 </head>
 
 <body>
