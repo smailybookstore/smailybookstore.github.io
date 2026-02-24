@@ -177,8 +177,18 @@ window.open(
   "https://t.me/@Jamshid211?text=" + message,
   "_blank"
 );
+function selectBookFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const bookParam = params.get("book");
 
-window.addEventListener("load", updatePrice);
+    if (bookParam && prices[bookParam]) {
+        document.getElementById("book").value = bookParam;
+    }
+  }
+window.addEventListener("load", function() {
+    selectBookFromURL();
+    updatePrice();
+});
 </script>
 
 </body>
