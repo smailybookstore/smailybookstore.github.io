@@ -251,6 +251,75 @@
   display: none !important;
 }
     
+.actions::before, .actions::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* ===== Consistent Card Layout Fix ===== */
+.card{
+  overflow:hidden;
+}
+
+.book-top{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.cover{
+  width:100%;
+  display:block;
+  border-radius:18px;
+  object-fit:cover;
+  background:#111;
+}
+
+.book-meta{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.book-meta .title{
+  margin:0;
+}
+
+.book-meta .edition{
+  margin:0;
+  line-height:1.5;
+  opacity:.9;
+}
+
+.actions{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:10px;
+}
+
+.actions .btn{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:16px 14px;
+  border-radius:18px;
+  text-align:center;
+  font-weight:700;
+  line-height:1.2;
+}
+
+.actions .disabled{
+  opacity:.55;
+  pointer-events:none;
+}
+
+.tiny{
+  margin-top:10px;
+}
+/* ===== End Fix ===== */
+
 </style>
 </head>
 
