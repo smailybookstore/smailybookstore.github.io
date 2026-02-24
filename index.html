@@ -302,7 +302,39 @@
   margin-top:10px;
 }
 /* ===== End Fix ===== */
+/* ===== FINAL BUTTON FIX ===== */
 
+.actions{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.actions .btn,
+.actions .secondary,
+.actions .primary{
+  width:100%;
+  display:block;
+  box-sizing:border-box;
+  text-align:center;
+  padding:18px 16px;
+  line-height:1.3;
+}
+
+.actions .disabled{
+  width:100%;
+  display:block;
+  text-align:center;
+  padding:18px 16px;
+  opacity:.55;
+}
+
+.btn{
+  white-space:normal;
+  word-break:break-word;
+}
+
+/* ===== END FIX ===== */
 </style>
 </head>
 
