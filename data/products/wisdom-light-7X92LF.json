@@ -1,0 +1,25 @@
+{
+  "productId": "wisdom-light-7X92LF",
+  "title": "حکمت نور",
+  "titleEn": "The Wisdom of Light",
+  "author": "جمشید اسماعیلی",
+  "language": "fa",
+  "edition": "Persian Edition",
+  "chapters": 20,
+  "field": [
+    "فلسفه آگاهی",
+    "فلسفه حکمی",
+    "مطالعات آگاهی"
+  ],
+  "status": "READY",
+  "price": {
+    "amount": 2980000,
+    "currency": "IRR",
+    "displayAmount": 298000,
+    "displayCurrency": "TOMAN"
+  },
+  "delivery": {
+    "method": "Seller-confirmed",
+    "status": "MANUAL_VERIFICATION"
+  }
+}

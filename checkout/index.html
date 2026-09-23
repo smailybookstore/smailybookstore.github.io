@@ -83,6 +83,17 @@ input,button {
 </form>
 <div id="result"></div>
 <script>
+fetch("../data/products/wisdom-light-7X92LF.json")
+  .then(function(r) {
+    if (!r.ok) throw new Error("PRODUCT_RECORD_LOAD_FAILED");
+    return r.json();
+  })
+  .then(function(product) {
+    window.SKOS_PRODUCT = product;
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
 const productId = "wisdom-light-7X92LF";
 const params = new URLSearchParams(window.location.search);
 const orderId =
@@ -148,12 +159,20 @@ document.getElementById("orderForm").addEventListener("submit", function(e) {
   const cryptoCurrency =
     document.querySelector('input[name="cryptoCurrency"]:checked')?.value || "";
 
+  const product = window.SKOS_PRODUCT;
+
+  if (!product) {
+    document.getElementById("result").textContent =
+      "خطا: اطلاعات محصول هنوز بارگذاری نشده است.";
+    return;
+  }
+
   const order = {
     orderId: orderId,
-    productId: productId,
-    productTitle: "حکمت نور",
-    amount: 298000,
-    currency: "IRR",
+    productId: product.productId,
+    productTitle: product.title,
+    amount: product.price.amount,
+    currency: product.price.currency,
     buyerName: document.getElementById("buyerName").value.trim(),
     buyerEmail: document.getElementById("buyerEmail").value.trim(),
     paymentMethod: paymentMethod,
