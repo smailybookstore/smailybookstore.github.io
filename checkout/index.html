@@ -17,7 +17,7 @@ input,button {
 }
 </style><title>حکمت نور — ثبت سفارش</title></head><body><h1>حکمت نور</h1>
 <div id="price">
-  <strong>قیمت: ۲۹۸٬۰۰۰ تومان</strong>
+  <strong id="priceText">قیمت: ۲۹۸٬۰۰۰ تومان</strong>
 </div>
 <div id="order"></div>
 <form id="orderForm">
@@ -94,8 +94,73 @@ fetch("../data/products/wisdom-light-7X92LF.json")
   .catch(function(err) {
     console.error(err);
   });
-const productId = "wisdom-light-7X92LF";
 const params = new URLSearchParams(window.location.search);
+const book = params.get("book") || "wisdom-light-7X92L";
+const paymentRoute = params.get("market") || "rial";
+const isCrypto = paymentRoute === "crypto";
+
+const catalog = {
+  "wisdom-of-deylaman": {
+    productId: "wisdom-of-deylaman",
+    title: "The Wisdom of Deylaman",
+    language: "en"
+  },
+  "wisdom-light-7X92L": {
+    productId: "wisdom-light-7X92LF",
+    title: "The Wisdom of Light",
+    language: "en"
+  },
+  "cpp-Z51M4": {
+    productId: "cpp-Z51M4",
+    title: "Comprehensive Publishing Project",
+    language: "en"
+  },
+  "the_power_of_simplicity": {
+    productId: "the_power_of_simplicity",
+    title: "The Power of Simplicity",
+    language: "en"
+  },
+  "deylaman-fa-F29P81": {
+    productId: "deylaman-fa-F29P81",
+    title: "Hekmat-e Deylaman",
+    language: "fa"
+  },
+  "hekmat-e-nur": {
+    productId: "wisdom-light-7X92LF",
+    title: "Hekmat-e Nur",
+    language: "fa"
+  },
+  "gilan_fa": {
+    productId: "gilan_fa",
+    title: "Gilan The Ancient Land",
+    language: "fa"
+  },
+  "engineering_winning_proposal_fa": {
+    productId: "engineering_winning_proposal_fa",
+    title: "Engineering Winning Proposal",
+    language: "fa"
+  },
+  "intellectual-architecture": {
+    productId: "intellectual-architecture",
+    title: "Intellectual Architecture",
+    language: "fa"
+  },
+  "Global Academic Success Map": {
+    productId: "Global Academic Success Map",
+    title: "Global Academic Success Map",
+    language: "fa"
+  }
+};
+
+const selected = catalog[book] || catalog["wisdom-light-7X92L"];
+const productId = selected.productId;
+const productTitle = selected.title;
+const productLanguage = selected.language;
+
+const rialPrice = 2980000;
+const rialDisplayPrice = 298000;
+const cryptoPrice = productLanguage === "fa" ? 6 : 9;
+const paymentCurrency = isCrypto ? "USD" : "IRR";
 const orderId =
   params.get("order") ||
   "WL-" + Date.now().toString(36).toUpperCase();
@@ -124,11 +189,39 @@ document.querySelectorAll('input[name="cryptoCurrency"]').forEach(function(input
   });
 });
 
+if (isCrypto) {
+  document.documentElement.lang = "en";
+  document.getElementById("priceText").textContent =
+    "Crypto Edition — $" + cryptoPrice;
+  document.getElementById("rialDetails").hidden = true;
+
+  const rialRadio = document.querySelector(
+    'input[name="paymentMethod"][value="rial"]'
+  );
+  if (rialRadio) {
+    rialRadio.disabled = true;
+    rialRadio.checked = false;
+    rialRadio.parentElement.hidden = true;
+  }
+
+  const cryptoRadio = document.querySelector(
+    'input[name="paymentMethod"][value="crypto"]'
+  );
+  if (cryptoRadio) {
+    cryptoRadio.checked = true;
+  }
+
+  document.getElementById("cryptoDetails").hidden = false;
+}
+
 document.querySelectorAll('input[name="paymentMethod"]').forEach(function(input) {
   input.addEventListener("change", function() {
     const isRial = this.value === "rial";
     document.getElementById("rialDetails").hidden = !isRial;
     document.getElementById("cryptoDetails").hidden = isRial;
+    document.getElementById("priceText").textContent = isRial
+      ? "قیمت: ۲۹۸٬۰۰۰ تومان"
+      : "Crypto Edition — $" + cryptoPrice;
   });
 });
 
@@ -169,10 +262,12 @@ document.getElementById("orderForm").addEventListener("submit", function(e) {
 
   const order = {
     orderId: orderId,
-    productId: product.productId,
-    productTitle: product.title,
-    amount: product.price.amount,
-    currency: product.price.currency,
+    productId: productId,
+    productTitle: productTitle,
+    amount: isCrypto ? cryptoPrice : rialPrice,
+    currency: paymentCurrency,
+    displayAmount: isCrypto ? cryptoPrice : rialDisplayPrice,
+    displayCurrency: isCrypto ? "USD" : "TOMAN",
     buyerName: document.getElementById("buyerName").value.trim(),
     buyerEmail: document.getElementById("buyerEmail").value.trim(),
     paymentMethod: paymentMethod,
