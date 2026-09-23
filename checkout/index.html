@@ -1,204 +1,171 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Official Checkout — Smaily Book Store</title>
-
 <style>
-body{
-margin:0;
-font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-background:#0c1220;
-color:#f2f4fa;
+html,body,input,button {
+  font-family: Tahoma, "Noto Sans Arabic", Arial, sans-serif;
 }
-.container{
-max-width:820px;
-margin:0 auto;
-padding:40px 20px;
+body {
+  direction: rtl;
+  text-align: right;
+  margin: 24px;
+  line-height: 1.8;
 }
-.card{
-background:#131c33;
-border-radius:18px;
-padding:28px;
-box-shadow:0 20px 60px rgba(0,0,0,.5);
+input,button {
+  font-size: 16px;
+  padding: 10px;
+  margin: 6px 0;
 }
-h1{margin-top:0;font-size:22px;}
-select,input{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,.15);
-background:#0f162a;
-color:white;
-margin-top:8px;
-margin-bottom:16px;
-}
-button{
-padding:12px 18px;
-border-radius:12px;
-border:0;
-font-weight:600;
-cursor:pointer;
-}
-.primary{background:#2b6cff;color:white;}
-.secondary{background:#1f2a4a;color:white;}
-.label{font-size:13px;color:#b6c2e6;margin-bottom:4px;}
-.wallet{
-background:#0f162a;
-padding:12px;
-border-radius:10px;
-word-break:break-all;
-margin-bottom:10px;
-}
-.notice{
-font-size:12px;
-color:#aab6da;
-margin-top:10px;
-line-height:1.5;
-}
-.footer{
-text-align:center;
-margin-top:25px;
-font-size:12px;
-color:#8c97b9;
-}
-</style>
-</head>
+</style><title>حکمت نور — ثبت سفارش</title></head><body><h1>حکمت نور</h1>
+<div id="price">
+  <strong>قیمت: ۲۹۸٬۰۰۰ تومان</strong>
+</div>
+<div id="order"></div>
+<form id="orderForm">
+  <input id="buyerName" type="text" placeholder="نام خریدار" required>
+  <input id="buyerEmail" type="email" placeholder="ایمیل" required>
+  <fieldset>
+    <legend>روش پرداخت</legend>
+    <label>
+      <input type="radio" name="paymentMethod" value="rial" required>
+      پرداخت ریالی
+    </label>
+    <label>
+      <input type="radio" name="paymentMethod" value="crypto">
+      پرداخت رمزارزی
+    </label>
+  </fieldset>
 
-<body>
-<div class="container">
-<div class="card">
+  <div id="cryptoDetails" hidden>
+    <h3>پرداخت رمزارزی</h3>
+    <p>شبکه و ارز موردنظر خود را انتخاب کنید.</p>
 
-<h1>Official Crypto Checkout</h1>
+    <label>
+      <input type="radio" name="cryptoCurrency" value="btc">
+      Bitcoin (BTC)
+    </label>
 
-<div class="label">Select Book</div>
-<select id="book" onchange="updatePrice()">
-  <option value="wisdom-of-deylaman">The Wisdom of Deylaman (F29P8)</option>
-  <option value="simplicity">The Power of Simplicity (A83K2)</option>
-  <option value="wisdom-light-7X92L">The Wisdom of Light (7X92L)</option>
-  <option value="cpp-Z51M4">Comprehensive Publishing Project (Z51M4)</option>
-<option value="deylaman-fa-F29P81">Hekmat-e Deylaman (Persian Edition) (F29P81)</option>
-<option value="wisdom-light-7X92LF"></option>
-<option value="Hekmat-e Noor (Persian Edition) (7X92LF)</option>
-<option value="gilai_fa">Gilan The Ancient Land (Persian Edition)</option>
-<option value="engineering_winning_proposal_fa">Engineering Winning Proposal (Persian Edition) </option>
-</select> 
+    <label>
+      <input type="radio" name="cryptoCurrency" value="eth">
+      Ethereum (ETH / ERC-20)
+    </label>
 
-<div class="label">Price</div>
-<div id="price" class="wallet">—</div>
+    <label>
+      <input type="radio" name="cryptoCurrency" value="usdt-erc20">
+      USDT (ERC-20)
+    </label>
+
+    <label>
+      <input type="radio" name="cryptoCurrency" value="usdt-trc20">
+      USDT (TRC-20 / TRON)
+    </label>
+
+    <div id="cryptoAddress" hidden>
+      <p><strong>آدرس پرداخت:</strong></p>
+      <p id="cryptoAddressValue"></p>
+    </div>
+  </div>
+
+  <div id="rialDetails" hidden>
+    <h3>پرداخت ریالی</h3>
+
+    <p><strong>بانک پاسارگاد</strong></p>
+    <p>کارت: 5022291051700290</p>
+    <p>حساب: 10664188</p>
+    <p>شبا: IR750570036580010664188101</p>
+
+    <p><strong>بانک سامان</strong></p>
+    <p>کارت: 6219861016845686</p>
+    <p>حساب: 2119208001</p>
+    <p>شبا: IR510560082880002119208001</p>
+  </div>
+
+  <button type="submit">ثبت سفارش</button>
+</form>
+<div id="result"></div>
 <script>
-  updatePrice();
-</script>
+const productId = "wisdom-light-7X92LF";
+const params = new URLSearchParams(window.location.search);
+const orderId =
+  params.get("order") ||
+  "WL-" + Date.now().toString(36).toUpperCase();
 
-<div class="label">Network</div>
-<div class="wallet">TRC20 — USDT (TRON)</div>
+const publicCheckoutUrl =
+  "https://smailybookstore.github.io/checkout/";
 
-<div class="label">Wallet Address</div>
-<div class="wallet" id="wallet">
-TUEPEMoUZWP76CuQAtkrxr1a5Udv4Ub93i
-</div>
+const paymentLink =
+  publicCheckoutUrl +
+  "?order=" +
+  encodeURIComponent(orderId);
+const orderStatus = "PENDING";
 
-<button class="secondary" onclick="copyWallet()">Copy Address</button>
-
-<br><br>
-
-<button class="primary" onclick="payTrust()">Pay with Trust Wallet</button>
-
-<hr style="margin:30px 0;border-color:rgba(255,255,255,.1);">
-
-<h3>Submit Confirmation</h3>
-
-<div class="label">Your Email</div>
-<input type="email" id="email" placeholder="name@example.com">
-
-<div class="label">Transaction Hash (TxID)</div>
-<input type="text" id="tx" placeholder="Paste TxID here">
-
-<button class="primary" onclick="sendMail()">Send Confirmation</button>
-
-<div class="notice">
-Important: Send exact amount on TRC20 network.  
-Crypto payments are final.  
-Secure private download link will be delivered after verification.
-</div>
-
-<div class="footer">
-Smaily Book Store — Official International Digital Editions<br>
-© All Rights Reserved
-</div>
-
-<script>
-const prices = {
-  "wisdom-of-deylaman": 18,
-  "wisdom-light-7X92L": 18,
-  "cpp-Z51M4": 15,
-  "simplicity": 16
-  "deylaman-fa-F29P81": 18,
-  "wisdom-light-7X92LF": 18,
-  "gilan_fa": 18,
-  "Engineering_Winning_Proposal_fa": 18,
+const cryptoAddresses = {
+  "btc": "bc1qzsv3rx6amuznwwtqywuvwv6ee7hngmhyvvk8yg",
+  "eth": "0x7DC23AF1A8aF40232b1a6b8877DB7A1660923743",
+  "usdt-erc20": "0x7DC23AF1A8aF40232b1a6b8877DB7A1660923743",
+  "usdt-trc20": "TUEPEMoUZWP76CuQAtkrxr1a5Udv4Ub93i"
 };
 
-function updatePrice(){
-let book = document.getElementById("book").value;
-document.getElementById("price").innerText = prices[book] + " USDT";
-}
-
-function copyWallet(){
-let text = document.getElementById("wallet").innerText;
-navigator.clipboard.writeText(text);
-alert("Wallet address copied.");
-}
-
-function payTrust(){
-let book = document.getElementById("book").value;
-let amount = prices[book];
-window.open("https://link.trustwallet.com/send?coin=195&address=TUEPEMoUZWP76CuQAtkrxr1a5Udv4Ub93i&amount=" + amount);
-}
-
-function sendMail(){
-let email = document.getElementById("email").value;
-let tx = document.getElementById("tx").value;
-let book = document.getElementById("book").value;
-let amount = prices[book];
-
-if(!email || !tx){
-alert("Please enter email and TxID.");
-return;
-}
-
-let subject = "Purchase Confirmation — Smaily Book Store";
-let body = 
-"Book: " + book +
-"\nAmount: " + amount + " USDT (TRC20)" +
-"\nBuyer Email: " + email +
-"\nTransaction Hash: " + tx;
-
-let message =
-  "New Crypto Purchase%0A" +
-  "Book: " + book + "%0A" +
-  "Amount: " + amount + " USDT (TRC20)%0A" +
-  "Buyer Email: " + email + "%0A" +
-  "Transaction Hash: " + tx;
-
-window.open(
-  "https://t.me/@Jamshid211?text=" + message,
-  "_blank"
-);
-function selectBookFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const bookParam = params.get("book");
-
-    if (bookParam && prices[bookParam]) {
-        document.getElementById("book").value = bookParam;
-    }
-  }
-window.addEventListener("load", function() {
-    selectBookFromURL();
-    updatePrice();
+document.querySelectorAll('input[name="cryptoCurrency"]').forEach(function(input) {
+  input.addEventListener("change", function() {
+    document.getElementById("cryptoAddressValue").textContent =
+      cryptoAddresses[this.value];
+    document.getElementById("cryptoAddress").hidden = false;
+  });
 });
-</script>
 
-</body>
-</html>
+document.querySelectorAll('input[name="paymentMethod"]').forEach(function(input) {
+  input.addEventListener("change", function() {
+    const isRial = this.value === "rial";
+    document.getElementById("rialDetails").hidden = !isRial;
+    document.getElementById("cryptoDetails").hidden = isRial;
+  });
+});
+
+document.getElementById("order").innerHTML =
+      "Product ID: " + productId + "<br>" +
+      "Order ID: " + orderId + "<br>" +
+      "Status: " + orderStatus +
+      "<br><br><strong>لینک سفارش:</strong><br>" +
+      '<a id="paymentLink" href="' + paymentLink +
+      '" target="_blank" rel="noopener" style="word-break:break-all">' +
+      paymentLink + '</a>' +
+      '<br><button type="button" id="copyPaymentLink">کپی لینک سفارش</button>';
+
+document.getElementById("paymentLink").value = paymentLink;
+
+document.getElementById("copyPaymentLink").addEventListener("click", function() {
+  navigator.clipboard.writeText(paymentLink).then(function() {
+    this.textContent = "لینک کپی شد";
+  }.bind(this));
+});
+
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const paymentMethod =
+    document.querySelector('input[name="paymentMethod"]:checked')?.value || "";
+
+  const cryptoCurrency =
+    document.querySelector('input[name="cryptoCurrency"]:checked')?.value || "";
+
+  const order = {
+    orderId: orderId,
+    productId: productId,
+    productTitle: "حکمت نور",
+    amount: 298000,
+    currency: "IRR",
+    buyerName: document.getElementById("buyerName").value.trim(),
+    buyerEmail: document.getElementById("buyerEmail").value.trim(),
+    paymentMethod: paymentMethod,
+    cryptoCurrency: cryptoCurrency,
+    status: "PENDING",
+    createdAt: new Date().toISOString()
+  };
+
+  localStorage.setItem("SKOS_ORDER_" + orderId, JSON.stringify(order));
+
+  document.getElementById("result").textContent =
+    "سفارش " + orderId + " با موفقیت ثبت شد. وضعیت: PENDING";
+});
+
+</script></body></html>
