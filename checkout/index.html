@@ -1,12 +1,28 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+>
+
+<title>ثبت سفارش — Smaily Bookstore</title>
 
 <style>
-html,body,input,button {
-  font-family: Tahoma, "Noto Sans Arabic", Arial, sans-serif;
+
+html,
+body,
+input,
+button {
+  font-family:
+    Tahoma,
+    "Noto Sans Arabic",
+    Arial,
+    sans-serif;
 }
 
 body {
@@ -16,27 +32,71 @@ body {
   line-height: 1.8;
 }
 
-input,button {
+input,
+button {
   font-size: 16px;
   padding: 10px;
   margin: 6px 0;
 }
+
+fieldset {
+  margin: 16px 0;
+  padding: 12px;
+}
+
+label {
+  display: block;
+  margin: 6px 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#order {
+  margin: 16px 0;
+}
+
+#cryptoAddressValue {
+  word-break: break-all;
+  direction: ltr;
+  text-align: left;
+}
+
+#paymentLink {
+  word-break: break-all;
+}
+
 </style>
 
-<title>حکمت نور — ثبت سفارش</title>
 </head>
+
 
 <body>
 
-<h1>حکمت نور</h1>
+
+<h1 id="productTitle">Smaily Bookstore</h1>
+
 
 <div id="price">
-  <strong id="priceText">قیمت: ۲۹۸٬۰۰۰ تومان</strong>
+
+  <strong id="priceText">
+    در حال بارگذاری قیمت...
+  </strong>
+
 </div>
+
 
 <div id="order"></div>
 
+
 <form id="orderForm">
+
 
   <input
     id="buyerName"
@@ -45,6 +105,7 @@ input,button {
     required
   >
 
+
   <input
     id="buyerEmail"
     type="email"
@@ -52,237 +113,516 @@ input,button {
     required
   >
 
+
   <fieldset>
-    <legend>روش پرداخت</legend>
+
+    <legend>
+      روش پرداخت
+    </legend>
+
 
     <label>
+
       <input
         type="radio"
         name="paymentMethod"
         value="rial"
         required
       >
+
       پرداخت ریالی
+
     </label>
 
+
     <label>
+
       <input
         type="radio"
         name="paymentMethod"
         value="crypto"
       >
+
       پرداخت رمزارزی
+
     </label>
+
   </fieldset>
 
-  <div id="cryptoDetails" hidden>
 
-    <h3>پرداخت رمزارزی</h3>
+  <div
+    id="cryptoDetails"
+    hidden
+  >
 
-    <p>شبکه و ارز موردنظر خود را انتخاب کنید.</p>
+    <h3>
+      پرداخت رمزارزی
+    </h3>
+
+    <p>
+      شبکه و ارز موردنظر خود را انتخاب کنید.
+    </p>
+
 
     <label>
+
       <input
         type="radio"
         name="cryptoCurrency"
         value="btc"
       >
+
       Bitcoin (BTC)
+
     </label>
 
+
     <label>
+
       <input
         type="radio"
         name="cryptoCurrency"
         value="eth"
       >
+
       Ethereum (ETH / ERC-20)
+
     </label>
 
+
     <label>
+
       <input
         type="radio"
         name="cryptoCurrency"
         value="usdt-erc20"
       >
+
       USDT (ERC-20)
+
     </label>
 
+
     <label>
+
       <input
         type="radio"
         name="cryptoCurrency"
         value="usdt-trc20"
       >
+
       USDT (TRC-20 / TRON)
+
     </label>
 
-    <div id="cryptoAddress" hidden>
-      <p><strong>آدرس پرداخت:</strong></p>
+
+    <div
+      id="cryptoAddress"
+      hidden
+    >
+
+      <p>
+        <strong>
+          آدرس پرداخت:
+        </strong>
+      </p>
+
       <p id="cryptoAddressValue"></p>
+
     </div>
 
   </div>
 
-  <div id="rialDetails" hidden>
 
-    <h3>پرداخت ریالی</h3>
+  <div
+    id="rialDetails"
+    hidden
+  >
 
-    <p><strong>بانک پاسارگاد</strong></p>
-    <p>کارت: 5022291051700290</p>
-    <p>حساب: 10664188</p>
-    <p>شبا: IR750570036580010664188101</p>
+    <h3>
+      پرداخت ریالی
+    </h3>
 
-    <p><strong>بانک سامان</strong></p>
-    <p>کارت: 6219861016845686</p>
-    <p>حساب: 2119208001</p>
-    <p>شبا: IR510560082880002119208001</p>
+
+    <p>
+      <strong>
+        بانک پاسارگاد
+      </strong>
+    </p>
+
+    <p>
+      کارت:
+      5022291051700290
+    </p>
+
+    <p>
+      حساب:
+      10664188
+    </p>
+
+    <p>
+      شبا:
+      IR750570036580010664188101
+    </p>
+
+
+    <p>
+      <strong>
+        بانک سامان
+      </strong>
+    </p>
+
+    <p>
+      کارت:
+      6219861016845686
+    </p>
+
+    <p>
+      حساب:
+      2119208001
+    </p>
+
+    <p>
+      شبا:
+      IR510560082880002119208001
+    </p>
 
   </div>
 
-  <button type="submit">ثبت سفارش</button>
+
+  <button
+    type="submit"
+  >
+    ثبت سفارش
+  </button>
+
 
 </form>
 
+
 <div id="result"></div>
+
+
 
 <script>
 
-/* --------------------------------------------------
-   Product Record
--------------------------------------------------- */
-
-fetch("../data/products/wisdom-light-7X92LF.json")
-  .then(function(r) {
-    if (!r.ok) {
-      throw new Error("PRODUCT_RECORD_LOAD_FAILED");
-    }
-
-    return r.json();
-  })
-  .then(function(product) {
-    window.SKOS_PRODUCT = product;
-  })
-  .catch(function(err) {
-    console.error(err);
-  });
+/* ==================================================
+   SMAILY BOOKSTORE
+   GENERIC CHECKOUT RUNTIME
+   ================================================== */
 
 
 /* --------------------------------------------------
-   Query Parameters
+   SKOS Commerce API
 -------------------------------------------------- */
 
-const params = new URLSearchParams(window.location.search);
-
-const book =
-  params.get("book") || "wisdom-light-7X92L";
-
-const paymentRoute =
-  params.get("market") || "rial";
-
-const isCrypto =
-  paymentRoute === "crypto";
+const SKOS_COMMERCE_API =
+  "https://smaily-commerce-api.iran-jsbsmaily1.workers.dev";
 
 
 /* --------------------------------------------------
-   Catalog
+   Public Checkout URL
 -------------------------------------------------- */
 
-const catalog = {
+const PUBLIC_CHECKOUT_URL =
+  "https://smailybookstore.github.io/checkout/";
+
+
+/* --------------------------------------------------
+   Standard Pricing
+-------------------------------------------------- */
+
+const PRICING = {
+
+  rial:
+    2980000,
+
+  rialDisplay:
+    298000
+
+};
+
+
+/* --------------------------------------------------
+   Product Registry
+   --------------------------------------------------
+   این Registry پل عمومی میان ویترین و موتور سفارش است.
+
+   برای افزودن اثر جدید در آینده:
+   فقط یک رکورد جدید به این بخش اضافه می‌شود.
+
+   Checkout Engine نیازی به بازنویسی ندارد.
+-------------------------------------------------- */
+
+const PRODUCT_REGISTRY = {
+
 
   "wisdom-of-deylaman": {
-    productId: "wisdom-of-deylaman",
-    title: "The Wisdom of Deylaman",
-    language: "en"
+
+    productId:
+      "wisdom-of-deylaman",
+
+    title:
+      "The Wisdom of Deylaman",
+
+    language:
+      "en",
+
+    market:
+      "global",
+
+    file:
+      "../assets/files/deylaman-F29P8.pdf"
+
   },
+
 
   "wisdom-light-7X92L": {
-    productId: "wisdom-light-7X92LF",
-    title: "The Wisdom of Light",
-    language: "en"
+
+    productId:
+      "wisdom-light-7X92LF",
+
+    title:
+      "The Wisdom of Light",
+
+    language:
+      "en",
+
+    market:
+      "global",
+
+    file:
+      "../assets/files/wisdom-light-7X92L.pdf",
+
+    productRecord:
+      "../data/products/wisdom-light-7X92LF.json"
+
   },
+
 
   "cpp-Z51M4": {
-    productId: "cpp-Z51M4",
-    title: "Comprehensive Publishing Project",
-    language: "en"
+
+    productId:
+      "cpp-Z51M4",
+
+    title:
+      "Comprehensive Publishing Project",
+
+    language:
+      "en",
+
+    market:
+      "global",
+
+    file:
+      "../assets/files/cpp-Z51M4.pdf"
+
   },
+
 
   "the_power_of_simplicity": {
-    productId: "the_power_of_simplicity",
-    title: "The Power of Simplicity",
-    language: "en"
+
+    productId:
+      "the_power_of_simplicity",
+
+    title:
+      "The Power of Simplicity",
+
+    language:
+      "en",
+
+    market:
+      "global",
+
+    file:
+      "../assets/files/simplicity-A83K2.pdf"
+
   },
+
 
   "deylaman-fa-F29P81": {
-    productId: "deylaman-fa-F29P81",
-    title: "Hekmat-e Deylaman",
-    language: "fa"
+
+    productId:
+      "deylaman-fa-F29P81",
+
+    title:
+      "Hekmat-e Deylaman",
+
+    language:
+      "fa",
+
+    market:
+      "rial",
+
+    file:
+      "../assets/files/deylaman-F29P81.pdf"
+
   },
+
 
   "hekmat-e-nur": {
-    productId: "wisdom-light-7X92LF",
-    title: "Hekmat-e Nur",
-    language: "fa"
+
+    productId:
+      "wisdom-light-7X92LF",
+
+    title:
+      "Hekmat-e Nur",
+
+    language:
+      "fa",
+
+    market:
+      "rial",
+
+    file:
+      "../assets/files/wisdom_light_7x92lf.pdf",
+
+    productRecord:
+      "../data/products/wisdom-light-7X92LF.json"
+
   },
+
 
   "gilan_fa": {
-    productId: "gilan_fa",
-    title: "Gilan The Ancient Land",
-    language: "fa"
+
+    productId:
+      "gilan_fa",
+
+    title:
+      "Gilan The Ancient Land",
+
+    language:
+      "fa",
+
+    market:
+      "rial",
+
+    file:
+      "../assets/files/gilan.pdf"
+
   },
+
 
   "engineering_winning_proposal_fa": {
-    productId: "engineering_winning_proposal_fa",
-    title: "Engineering Winning Proposal",
-    language: "fa"
+
+    productId:
+      "engineering_winning_proposal_fa",
+
+    title:
+      "Engineering Winning Proposal",
+
+    language:
+      "fa",
+
+    market:
+      "rial",
+
+    file:
+      "../assets/files/Engineering_Winning_Proposal_fa.pdf"
+
   },
+
 
   "intellectual-architecture": {
-    productId: "intellectual-architecture",
-    title: "Intellectual Architecture",
-    language: "fa"
+
+    productId:
+      "intellectual-architecture",
+
+    title:
+      "Intellectual Architecture",
+
+    language:
+      "fa",
+
+    market:
+      "rial",
+
+    file:
+      "../assets/files/intellectual_architecture.pdf"
+
   },
 
-  "Global Academic Success Map": {
-    productId: "Global Academic Success Map",
-    title: "Global Academic Success Map",
-    language: "fa"
+
+  "global-academic-success-map": {
+
+    productId:
+      "global-academic-success-map",
+
+    title:
+      "Global Academic Success Map",
+
+    language:
+      "en",
+
+    market:
+      "global",
+
+    file:
+      "../assets/files/global_academic_success_map.pdf"
+
   }
 
 };
 
 
 /* --------------------------------------------------
-   Selected Product
+   Query Parameters
 -------------------------------------------------- */
 
-const selected =
-  catalog[book] ||
-  catalog["wisdom-light-7X92L"];
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
 
-const productId =
-  selected.productId;
 
-const productTitle =
-  selected.title;
+/*
+   book:
+   شناسه محصولی که از ویترین ارسال شده است.
+*/
 
-const productLanguage =
-  selected.language;
+const requestedBook =
+  params.get("book") ||
+  "wisdom-light-7X92L";
+
+
+/*
+   market:
+   rial / crypto
+*/
+
+const requestedMarket =
+  params.get("market") ||
+  "rial";
 
 
 /* --------------------------------------------------
-   Pricing
+   Resolve Product
 -------------------------------------------------- */
 
-const rialPrice = 2980000;
+const selectedProduct =
+  PRODUCT_REGISTRY[requestedBook] ||
+  PRODUCT_REGISTRY["wisdom-light-7X92L"];
 
-const rialDisplayPrice = 298000;
 
-const cryptoPrice =
-  productLanguage === "fa"
-    ? 6
-    : 9;
+const productId =
+  selectedProduct.productId;
+
+
+const productTitle =
+  selectedProduct.title;
+
+
+const productLanguage =
+  selectedProduct.language;
+
+
+/* --------------------------------------------------
+   Resolve Market
+-------------------------------------------------- */
+
+const isCrypto =
+  requestedMarket === "crypto";
+
 
 const paymentCurrency =
   isCrypto
@@ -290,27 +630,36 @@ const paymentCurrency =
     : "IRR";
 
 
+const cryptoPrice =
+  productLanguage === "fa"
+    ? 6
+    : 9;
+
+
 /* --------------------------------------------------
-   Order
+   Order ID
 -------------------------------------------------- */
 
 const orderId =
   params.get("order") ||
-  "WL-" +
+  "SM-" +
   Date.now()
     .toString(36)
     .toUpperCase();
 
-const publicCheckoutUrl =
-  "https://smailybookstore.github.io/checkout/";
+
+/* --------------------------------------------------
+   Payment Link
+-------------------------------------------------- */
 
 const paymentLink =
-  publicCheckoutUrl +
-  "?order=" +
+  PUBLIC_CHECKOUT_URL +
+  "?book=" +
+  encodeURIComponent(requestedBook) +
+  "&market=" +
+  encodeURIComponent(requestedMarket) +
+  "&order=" +
   encodeURIComponent(orderId);
-
-const orderStatus =
-  "PENDING";
 
 
 /* --------------------------------------------------
@@ -319,10 +668,10 @@ const orderStatus =
 
 const cryptoAddresses = {
 
-  "btc":
+  btc:
     "bc1qzsv3rx6amuznwwtqywuvwv6ee7hngmhyvvk8yg",
 
-  "eth":
+  eth:
     "0x7DC23AF1A8aF40232b1a6b8877DB7A1660923743",
 
   "usdt-erc20":
@@ -335,81 +684,83 @@ const cryptoAddresses = {
 
 
 /* --------------------------------------------------
-   Crypto Currency Selection
+   Product UI
 -------------------------------------------------- */
 
 document
-  .querySelectorAll(
-    'input[name="cryptoCurrency"]'
-  )
-  .forEach(function(input) {
+  .getElementById("productTitle")
+  .textContent =
+    productTitle;
 
-    input.addEventListener(
-      "change",
-      function() {
 
-        document
-          .getElementById("cryptoAddressValue")
-          .textContent =
-          cryptoAddresses[this.value];
-
-        document
-          .getElementById("cryptoAddress")
-          .hidden = false;
-
-      }
-    );
-
-  });
+document
+  .getElementById("priceText")
+  .textContent =
+    isCrypto
+      ? "Crypto Edition — $" + cryptoPrice
+      : "قیمت: ۲۹۸٬۰۰۰ تومان";
 
 
 /* --------------------------------------------------
-   Crypto Market
+   Language
 -------------------------------------------------- */
 
 if (isCrypto) {
 
-  document.documentElement.lang = "en";
+  document.documentElement.lang =
+    "en";
 
-  document
-    .getElementById("priceText")
-    .textContent =
-    "Crypto Edition — $" +
-    cryptoPrice;
+}
 
-  document
-    .getElementById("rialDetails")
-    .hidden = true;
 
-  const rialRadio =
-    document.querySelector(
-      'input[name="paymentMethod"][value="rial"]'
-    );
+/* --------------------------------------------------
+   Market UI
+-------------------------------------------------- */
+
+const rialRadio =
+  document.querySelector(
+    'input[name="paymentMethod"][value="rial"]'
+  );
+
+
+const cryptoRadio =
+  document.querySelector(
+    'input[name="paymentMethod"][value="crypto"]'
+  );
+
+
+if (isCrypto) {
 
   if (rialRadio) {
 
-    rialRadio.disabled = true;
+    rialRadio.disabled =
+      true;
 
-    rialRadio.checked = false;
+    rialRadio.checked =
+      false;
 
-    rialRadio.parentElement.hidden = true;
+    rialRadio.parentElement.hidden =
+      true;
 
   }
 
-  const cryptoRadio =
-    document.querySelector(
-      'input[name="paymentMethod"][value="crypto"]'
-    );
 
   if (cryptoRadio) {
 
-    cryptoRadio.checked = true;
+    cryptoRadio.checked =
+      true;
 
   }
+
 
   document
     .getElementById("cryptoDetails")
     .hidden = false;
+
+
+  document
+    .getElementById("rialDetails")
+    .hidden = true;
 
 }
 
@@ -428,23 +779,72 @@ document
       "change",
       function() {
 
-        const isRial =
+        const rial =
           this.value === "rial";
+
 
         document
           .getElementById("rialDetails")
-          .hidden = !isRial;
+          .hidden =
+            !rial;
+
 
         document
           .getElementById("cryptoDetails")
-          .hidden = isRial;
+          .hidden =
+            rial;
+
 
         document
           .getElementById("priceText")
-          .textContent = isRial
-            ? "قیمت: ۲۹۸٬۰۰۰ تومان"
-            : "Crypto Edition — $" +
-              cryptoPrice;
+          .textContent =
+            rial
+
+              ? "قیمت: ۲۹۸٬۰۰۰ تومان"
+
+              : "Crypto Edition — $" +
+                cryptoPrice;
+
+      }
+    );
+
+  });
+
+
+/* --------------------------------------------------
+   Crypto Currency Selection
+-------------------------------------------------- */
+
+document
+  .querySelectorAll(
+    'input[name="cryptoCurrency"]'
+  )
+  .forEach(function(input) {
+
+    input.addEventListener(
+      "change",
+      function() {
+
+        const address =
+          cryptoAddresses[
+            this.value
+          ];
+
+
+        document
+          .getElementById(
+            "cryptoAddressValue"
+          )
+          .textContent =
+            address || "";
+
+
+        document
+          .getElementById(
+            "cryptoAddress"
+          )
+          .hidden =
+            !address;
 
       }
     );
@@ -460,30 +860,44 @@ document
   .getElementById("order")
   .innerHTML =
 
-    "Product ID: " +
+    "<strong>Product ID:</strong> " +
     productId +
+
     "<br>" +
 
-    "Order ID: " +
+    "<strong>Order ID:</strong> " +
     orderId +
+
     "<br>" +
 
-    "Status: " +
-    orderStatus +
+    "<strong>Status:</strong> PENDING" +
 
-    "<br><br><strong>لینک سفارش:</strong><br>" +
+    "<br><br>" +
 
-    '<a id="paymentLink" href="' +
+    "<strong>لینک سفارش:</strong>" +
+
+    "<br>" +
+
+    '<a id="paymentLink" ' +
+    'href="' +
     paymentLink +
-    '" target="_blank" rel="noopener" ' +
-    'style="word-break:break-all">' +
-    paymentLink +
-    '</a>' +
+    '" ' +
+    'target="_blank" ' +
+    'rel="noopener">' +
 
-    '<br><button type="button" ' +
+    paymentLink +
+
+    "</a>" +
+
+    "<br>" +
+
+    '<button ' +
+    'type="button" ' +
     'id="copyPaymentLink">' +
-    'کپی لینک سفارش' +
-    '</button>';
+
+    "کپی لینک سفارش" +
+
+    "</button>";
 
 
 /* --------------------------------------------------
@@ -491,32 +905,110 @@ document
 -------------------------------------------------- */
 
 document
-  .getElementById("copyPaymentLink")
+  .getElementById(
+    "copyPaymentLink"
+  )
   .addEventListener(
     "click",
     function() {
 
-      navigator.clipboard
-        .writeText(paymentLink)
-        .then(
-          function() {
+      const button =
+        this;
 
-            this.textContent =
+
+      if (
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+      ) {
+
+        navigator.clipboard
+          .writeText(paymentLink)
+          .then(function() {
+
+            button.textContent =
               "لینک کپی شد";
 
-          }.bind(this)
-        );
+          });
+
+      }
 
     }
   );
 
 
 /* --------------------------------------------------
-   SKOS Commerce API
+   Optional Product Record
+--------------------------------------------------
+   فقط اگر برای محصول Record مستقل وجود داشته
+   باشد آن را بارگذاری می‌کنیم.
+
+   نبودن Product Record دیگر مانع ثبت سفارش
+   نخواهد بود؛ زیرا Registry اطلاعات پایه محصول
+   را در اختیار Checkout قرار داده است.
 -------------------------------------------------- */
 
-const SKOS_COMMERCE_API =
-  "https://smaily-commerce-api.iran-jsbsmaily1.workers.dev";
+let productRecord =
+  null;
+
+
+async function loadProductRecord() {
+
+  if (
+    !selectedProduct.productRecord
+  ) {
+
+    return null;
+
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        selectedProduct.productRecord,
+        {
+          cache:
+            "no-store"
+        }
+      );
+
+
+    if (
+      !response.ok
+    ) {
+
+      return null;
+
+    }
+
+
+    productRecord =
+      await response.json();
+
+
+    return productRecord;
+
+  }
+  catch (error) {
+
+    console.warn(
+      "Optional product record unavailable:",
+      error
+    );
+
+    return null;
+
+  }
+
+}
+
+
+/*
+   شروع بارگذاری اختیاری Record
+*/
+
+loadProductRecord();
 
 
 /* --------------------------------------------------
@@ -531,128 +1023,185 @@ document
 
       e.preventDefault();
 
+
       const paymentMethod =
         document.querySelector(
           'input[name="paymentMethod"]:checked'
         )?.value || "";
+
 
       const cryptoCurrency =
         document.querySelector(
           'input[name="cryptoCurrency"]:checked'
         )?.value || "";
 
-      const product =
-        window.SKOS_PRODUCT;
 
-      if (!product) {
+      if (!paymentMethod) {
 
         document
           .getElementById("result")
           .textContent =
-          "خطا: اطلاعات محصول هنوز بارگذاری نشده است.";
+            "لطفاً روش پرداخت را انتخاب کنید.";
 
         return;
+
       }
 
 
-      /* ----------------------------------------------
+      if (
+        paymentMethod === "crypto" &&
+        !cryptoCurrency
+      ) {
+
+        document
+          .getElementById("result")
+          .textContent =
+            "لطفاً ارز و شبکه پرداخت را انتخاب کنید.";
+
+        return;
+
+      }
+
+
+      /* --------------------------------------------
          Order Payload
-      ---------------------------------------------- */
+      -------------------------------------------- */
 
       const order = {
 
         orderId:
           orderId,
 
+
         productId:
           productId,
+
 
         productTitle:
           productTitle,
 
+
         amount:
           isCrypto
             ? cryptoPrice
-            : rialPrice,
+            : PRICING.rial,
+
 
         currency:
           paymentCurrency,
 
+
         quantity:
           1,
+
 
         buyer: {
 
           name:
             document
-              .getElementById("buyerName")
+              .getElementById(
+                "buyerName"
+              )
               .value
               .trim(),
 
+
           email:
             document
-              .getElementById("buyerEmail")
+              .getElementById(
+                "buyerEmail"
+              )
               .value
               .trim(),
+
 
           phone:
             ""
 
         },
 
+
         paymentMethod:
           paymentMethod,
+
 
         cryptoCurrency:
           cryptoCurrency,
 
+
         source:
           "SMAILY_BOOKSTORE",
+
 
         notes:
           "",
 
+
         displayAmount:
           isCrypto
             ? cryptoPrice
-            : rialDisplayPrice,
+            : PRICING.rialDisplay,
+
 
         displayCurrency:
           isCrypto
             ? "USD"
-            : "TOMAN"
+            : "TOMAN",
+
+
+        checkoutBook:
+          requestedBook,
+
+
+        checkoutMarket:
+          requestedMarket,
+
+
+        productFile:
+          selectedProduct.file
 
       };
 
 
       const result =
-        document.getElementById("result");
+        document.getElementById(
+          "result"
+        );
+
 
       result.textContent =
         "در حال ثبت سفارش...";
 
 
-      /* ----------------------------------------------
-         Send To Cloudflare Commerce API
-      ---------------------------------------------- */
+      /* --------------------------------------------
+         Send To SKOS Commerce API
+      -------------------------------------------- */
 
       try {
 
         const response =
           await fetch(
+
             SKOS_COMMERCE_API +
             "/commerce/orders",
+
             {
-              method: "POST",
+
+              method:
+                "POST",
 
               headers: {
+
                 "Content-Type":
                   "application/json"
+
               },
 
               body:
                 JSON.stringify(order)
+
             }
+
           );
 
 
@@ -673,40 +1222,59 @@ document
         }
 
 
-        /* --------------------------------------------
+        /* ------------------------------------------
            Local Mirror
-        -------------------------------------------- */
+        ------------------------------------------ */
 
         localStorage.setItem(
-          "SKOS_ORDER_" + orderId,
-          JSON.stringify(data.result)
+
+          "SKOS_ORDER_" +
+          orderId,
+
+          JSON.stringify(
+            data.result
+          )
+
         );
 
 
-        /* --------------------------------------------
+        /* ------------------------------------------
            Success
-        -------------------------------------------- */
+        ------------------------------------------ */
 
         result.textContent =
+
           "سفارش " +
           orderId +
-          " با موفقیت در موتور سفارش ثبت شد. وضعیت: " +
+          " با موفقیت در موتور سفارش ثبت شد. " +
+
+          "وضعیت: " +
+
           data.result.status;
 
+      }
 
-      } catch (error) {
 
-        console.error(error);
+      catch (error) {
+
+        console.error(
+          error
+        );
+
 
         result.textContent =
-          "خطا در اتصال به موتور سفارش. سفارش ثبت نشد.";
+
+          "خطا در اتصال به موتور سفارش. " +
+          "سفارش ثبت نشد.";
 
       }
 
     }
+
   );
 
 </script>
 
 </body>
+
 </html>
